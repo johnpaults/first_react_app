@@ -3,9 +3,9 @@ import './PersonComponent.css';
 
 const PersonComponent = (props) => {
     return (
-        <div className='Person' onClick = {props.deletePerson}>
-            <p>My name is {props.name} and age is {props.age}</p>
-            <input type = 'text' onChange = {props.updatedName} value = {props.name} />
+        <div className='Person'>
+            <p onClick = {props.deletePerson}>My name is {props.name} and age is {props.age}</p>
+            <input type = 'text' onChange = {props.changed} value = {props.name} />
         </div>
     );
 }

@@ -20,14 +20,15 @@ class App extends Component {
     );
   }
 
-  updateName = (event) => {
-    console.log(event);
+  updateName = (index, event) => {
+    const person = { ...this.state.persons[index] };
+    person.name = event.target.value;
+    const persons = [...this.state.persons];
+    persons[index] = person;
+
     this.setState({
-      persons: [
-        { name: event.target.value, age: `28` },
-        { name: "Jyoti", age: `25` }]
-    }
-    );
+      persons: persons
+    });
   }
 
   toggleNames = () => {
@@ -48,10 +49,10 @@ class App extends Component {
         <div>
           {this.state.persons.map((person, index) => {
               return <PersonComponent deletePerson= {this.deletePersonHandler.bind(this, index)} 
-                      name={person.name} age={person.age} key= {person.key}/>
+                      name={person.name} age={person.age} 
+                      key= {person.key} changed = {(event) => this.updateName(index, event)}/>
             }
           )}
-          <button onClick= {() => this.changePersonState('and he is a Senior Software Engineer')}>Add Profession</button>
         </div>
       );
     }
