@@ -39,8 +39,12 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <PersonComponent updatedName={this.updateName} name={this.state.persons[0].name} age={this.state.persons[0].age} />
-          <PersonComponent click={this.changePersonState.bind(this, 'and she is a software Engineer')} name={this.state.persons[1].name} age={this.state.persons[1].age} />
+          {this.state.persons.map(
+            person => {
+              return <PersonComponent updatedName={this.updateName} 
+                      name={person.name} age={person.age} />
+            }
+          )}
           <button onClick={() => this.changePersonState('and he is a Senior Software Engineer')}>Add Profession</button>
         </div>
       );
