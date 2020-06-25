@@ -33,19 +33,24 @@ class App extends Component {
     let doesName = this.state.showPersons;
     this.setState({showPersons: !doesName});
   }
-
+  
   render() {
+    let persons = null;
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <PersonComponent updatedName={this.updateName} name={this.state.persons[0].name} age={this.state.persons[0].age} />
+          <PersonComponent click={this.changePersonState.bind(this, 'and she is a software Engineer')} name={this.state.persons[1].name} age={this.state.persons[1].age} />
+          <button onClick={() => this.changePersonState('and he is a Senior Software Engineer')}>Add Profession</button>
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Welcome to my first react app</h1>
         <button onClick= {this.toggleNames}> Toggle Names </button>
-        { this.state.showPersons ?
-          <div>
-            <PersonComponent updatedName={this.updateName} name={this.state.persons[0].name} age={this.state.persons[0].age} />
-            <PersonComponent click={this.changePersonState.bind(this, 'and she is a software Engineer')} name={this.state.persons[1].name} age={this.state.persons[1].age} />
-            <button onClick={() => this.changePersonState('and he is a Senior Software Engineer')}>Add Profession</button>
-          </div> : null
-        }
+        { persons }
       </div>
     );
   }
