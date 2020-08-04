@@ -52,13 +52,17 @@ class App extends Component {
       padding: '8px',
       pointer: 'cursor'
     };
-
+    const classes = [];
+    if(this.state.persons.length < 2){
+      classes.push('red', 'bold');
+    }
     if (this.state.showPersons) {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-              return <PersonComponent deletePerson= {this.deletePersonHandler.bind(this, index)} 
+              return <PersonComponent  deletePerson= {this.deletePersonHandler.bind(this, index)} 
                       name={person.name} age={person.age} 
+                      classes = {classes.join(' ')}
                       key= {person.key} changed = {(event) => this.updateName(index, event)}/>
             }
           )}
